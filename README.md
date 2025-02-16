@@ -1,3 +1,9 @@
+This repo is a fork of the NLStruct repo by Perceval Wajsbürt, I have left the original README below.
+
+This fork adds the possibility when doing NER model followed by a span classification model to take the posibility to use an encoder a specific encoder from an existing model.
+
+It is the support for my paper [Extracting Information in a Low-resource Setting: Case Study on Bioinformatics Workflows](https://arxiv.org/abs/2411.19295).
+
 # NLStruct
 
 Natural language struturing library.

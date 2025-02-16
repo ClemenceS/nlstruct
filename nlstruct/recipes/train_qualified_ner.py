@@ -22,6 +22,7 @@ from nlstruct.checkpoint import AlreadyRunningException, ModelCheckpoint
 from nlstruct.data_utils import mappable
 from rich_logger import RichTableLogger
 
+from nlstruct import load_pretrained
 
 def isnotebook():
     try:
@@ -95,6 +96,7 @@ def train_qualified_ner(
     check_lock: bool = False,
     return_model: bool = False,
     fit: bool = True,
+    model_to_take_encoder = "None",
 ):
     """
     Trains and evaluate a nested NER model on a given dataset.
@@ -170,6 +172,8 @@ def train_qualified_ner(
         Check that a given experiment is not running before starting it and skips in that case
     return_model: bool
         Returns the final model
+    model_to_take_encoder: string
+        Specify if we want to use a specific encoder from an existing model
 
     Returns
     -------
@@ -258,6 +262,56 @@ def train_qualified_ner(
 
     display(dataset.describe())
 
+
+    if model_to_take_encoder != "None":
+        modele_load = load_pretrained(model_to_take_encoder)
+        encoder_to_take = modele_load.encoder
+    else:
+        encoder_to_take=dict(
+            module="concat",
+            dropout_p=0.5,
+            encoders=[
+                dict(
+                    module="bert",
+                    path=bert_name,
+                    n_layers=n_bert_layers,
+                    freeze_n_layers=0
+                    if finetune_bert is not False
+                    else -1,  # freeze 0 layer (including the first embedding layer)
+                    bert_dropout_p=None if finetune_bert else 0.0,
+                    token_dropout_p=0.0,
+                    proj_size=bert_proj_size,
+                    output_lm_embeds=False,
+                    combine_mode="scaled_softmax" if not norm_bert else "softmax",
+                    do_norm=norm_bert,
+                    do_cache=not finetune_bert,
+                    word_pooler=dict(module="pooler", mode=word_pooler_mode),
+                ),
+                *(
+                    [
+                        dict(
+                            module="char_cnn",
+                            in_channels=8,
+                            out_channels=50,
+                            kernel_sizes=(3, 4, 5),
+                        )
+                    ]
+                    if do_char
+                    else []
+                ),
+                *(
+                    [
+                        dict(
+                            module="word_embeddings",
+                            filename=fasttext_file,
+                        )
+                    ]
+                    if fasttext_file
+                    else []
+                ),
+            ],
+        )
+
     model = InformationExtractor(
         seed=seed,
         preprocessor=dict(
@@ -312,51 +366,9 @@ def train_qualified_ner(
             filter_entities=None,  # "entity_type_score_density", "entity_type_score_lesion"),
         ),
         dynamic_preprocessing=False,
-        # Text encoders
-        encoder=dict(
-            module="concat",
-            dropout_p=0.5,
-            encoders=[
-                dict(
-                    module="bert",
-                    path=bert_name,
-                    n_layers=n_bert_layers,
-                    freeze_n_layers=0
-                    if finetune_bert is not False
-                    else -1,  # freeze 0 layer (including the first embedding layer)
-                    bert_dropout_p=None if finetune_bert else 0.0,
-                    token_dropout_p=0.0,
-                    proj_size=bert_proj_size,
-                    output_lm_embeds=False,
-                    combine_mode="scaled_softmax" if not norm_bert else "softmax",
-                    do_norm=norm_bert,
-                    do_cache=not finetune_bert,
-                    word_pooler=dict(module="pooler", mode=word_pooler_mode),
-                ),
-                *(
-                    [
-                        dict(
-                            module="char_cnn",
-                            in_channels=8,
-                            out_channels=50,
-                            kernel_sizes=(3, 4, 5),
-                        )
-                    ]
-                    if do_char
-                    else []
-                ),
-                *(
-                    [
-                        dict(
-                            module="word_embeddings",
-                            filename=fasttext_file,
-                        )
-                    ]
-                    if fasttext_file
-                    else []
-                ),
-            ],
-        ),
+        
+        encoder=encoder_to_take,
+        
         decoder=dict(
             module="contiguous_qualified_entity_decoder",
             contextualizer=dict(
