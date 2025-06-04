@@ -6,21 +6,21 @@ It is the support for my paper [Extracting Information in a Low-resource Setting
 
 ```
 @InProceedings{10.1007/978-3-031-91398-3_21,
-author="Sebe, Cl{\'e}mence
-and Cohen-Boulakia, Sarah
-and Ferret, Olivier
-and N{\'e}v{\'e}ol, Aur{\'e}lie",
-editor="Krempl, Georg
-and Puolam{\"a}ki, Kai
-and Miliou, Ioanna",
-title="Extracting Information in a Low-Resource Setting: Case Study on Bioinformatics Workflows",
-booktitle="Advances in Intelligent Data Analysis XXIII",
-year="2025",
-publisher="Springer Nature Switzerland",
-address="Cham",
-pages="274--287",
-abstract="Bioinformatics workflows are essential for complex biological data analyses and are often described in scientific articles with source code in public repositories. Extracting detailed workflow information from articles can improve accessibility and reusability but is hindered by limited annotated corpora. To address this, we framed the problem as a low-resource extraction task and tested four strategies: 1) creating a tailored annotated corpus, 2) few-shot named-entity recognition (NER) with an autoregressive language model, 3) NER using masked language models with existing and new corpora, and 4) integrating workflow knowledge into NER models. Using BioToFlow, a new corpus of 52 articles annotated with 16 entities, a SciBERT-based NER model achieved a 70.4 F-measure, comparable to inter-annotator agreement. While knowledge integration improved performance for specific entities, it was less effective across the entire information schema. Our results demonstrate that high-performance information extraction for bioinformatics workflows is achievable.",
-isbn="978-3-031-91398-3"
+    author="Sebe, Cl{\'e}mence
+    and Cohen-Boulakia, Sarah
+    and Ferret, Olivier
+    and N{\'e}v{\'e}ol, Aur{\'e}lie",
+    editor="Krempl, Georg
+    and Puolam{\"a}ki, Kai
+    and Miliou, Ioanna",
+    title="Extracting Information in a Low-Resource Setting: Case Study on Bioinformatics Workflows",
+    booktitle="Advances in Intelligent Data Analysis XXIII",
+    year="2025",
+    publisher="Springer Nature Switzerland",
+    address="Cham",
+    pages="274--287",
+    abstract="Bioinformatics workflows are essential for complex biological data analyses and are often described in scientific articles with source code in public repositories. Extracting detailed workflow information from articles can improve accessibility and reusability but is hindered by limited annotated corpora. To address this, we framed the problem as a low-resource extraction task and tested four strategies: 1) creating a tailored annotated corpus, 2) few-shot named-entity recognition (NER) with an autoregressive language model, 3) NER using masked language models with existing and new corpora, and 4) integrating workflow knowledge into NER models. Using BioToFlow, a new corpus of 52 articles annotated with 16 entities, a SciBERT-based NER model achieved a 70.4 F-measure, comparable to inter-annotator agreement. While knowledge integration improved performance for specific entities, it was less effective across the entire information schema. Our results demonstrate that high-performance information extraction for bioinformatics workflows is achievable.",
+    isbn="978-3-031-91398-3"
 }
 ```
 
