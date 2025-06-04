@@ -414,7 +414,7 @@ def train_qualified_ner(
         fast_lr=lr,
         bert_lr=5e-5,
         # Optimizer, can be class or str
-        optimizer_cls="transformers.AdamW",
+        #optimizer_cls="transformers.AdamW",
         metrics=metrics,
     ).train()
 
@@ -467,9 +467,11 @@ def train_qualified_ner(
                 )
                 if gpus is not None:
                     assert accelerator == "auto" or accelerator == "gpu"
-                    trainer_kwargs["devices"] = gpus
+                    #trainer_kwargs["devices"] = gpus
                     if gpus == 0:
                         trainer_kwargs["accelerator"] = "cpu"
+                    else:
+                        trainer_kwargs["devices"] = gpus
 
                 pl_trainer_kw = inspect.signature(pl.Trainer).parameters
                 trainer_kwargs = {

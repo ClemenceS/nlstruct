@@ -298,7 +298,7 @@ def train_ner(
         bert_lr=5e-5,
 
         # Optimizer, can be class or str
-        optimizer_cls="transformers.AdamW",
+        #optimizer_cls="transformers.AdamW",
         metrics=metrics,
     ).train()
 
