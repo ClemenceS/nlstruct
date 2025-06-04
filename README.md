@@ -6,13 +6,8 @@ It is the support for my paper [Extracting Information in a Low-resource Setting
 
 ```
 @InProceedings{10.1007/978-3-031-91398-3_21,
-    author="Sebe, Cl{\'e}mence
-    and Cohen-Boulakia, Sarah
-    and Ferret, Olivier
-    and N{\'e}v{\'e}ol, Aur{\'e}lie",
-    editor="Krempl, Georg
-    and Puolam{\"a}ki, Kai
-    and Miliou, Ioanna",
+    author="Sebe, Cl{\'e}mence and Cohen-Boulakia, Sarah and Ferret, Olivier and N{\'e}v{\'e}ol, Aur{\'e}lie",
+    editor="Krempl, Georg and Puolam{\"a}ki, Kai and Miliou, Ioanna",
     title="Extracting Information in a Low-Resource Setting: Case Study on Bioinformatics Workflows",
     booktitle="Advances in Intelligent Data Analysis XXIII",
     year="2025",
