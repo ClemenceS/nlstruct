@@ -51,7 +51,7 @@ def load_from_brat(path, merge_spaced_fragments=True):
 
         # doc_id = filename.replace('.txt', '').split("/")[-1]
 
-        with open(files["txt"]) as f:
+        with open(files["txt"], encoding="utf-8") as f:
             text = f.read()
 
         if not len(files["ann"]):
@@ -62,7 +62,7 @@ def load_from_brat(path, merge_spaced_fragments=True):
             continue
 
         for ann_file in files["ann"]:
-            with open(ann_file) as f:
+            with open(ann_file, encoding="utf-8") as f:
                 for line_idx, line in enumerate(f):
                     try:
                         if line.startswith('T'):
@@ -179,14 +179,14 @@ def export_to_brat(samples, filename_prefix="", overwrite_txt=False, overwrite_a
     for doc in samples:
         txt_filename = os.path.join(filename_prefix, doc["doc_id"] + ".txt")
         if not os.path.exists(txt_filename) or overwrite_txt:
-            with open(txt_filename, "w") as f:
+            with open(txt_filename, "w", encoding="utf-8") as f:
                 f.write(doc["text"])
 
         ann_filename = os.path.join(filename_prefix, doc["doc_id"] + ".ann")
         attribute_idx = 1
         entities_ids = defaultdict(lambda: "T" + str(len(entities_ids) + 1))
         if not os.path.exists(ann_filename) or overwrite_ann:
-            with open(ann_filename, "w") as f:
+            with open(ann_filename, "w", encoding="utf-8") as f:
                 if "entities" in doc:
                     for entity in doc["entities"]:
                         idx = None
