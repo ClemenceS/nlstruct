@@ -152,7 +152,8 @@ def save_pretrained(self, filename):
 
 
 def load_pretrained(path, map_location=None):
-    loaded = torch.load(path, map_location=map_location)
+    map_location=torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
+    loaded = torch.load(path, map_location=map_location, weights_only=False)
     instance = get_instance(loaded["config"])
     instance.load_state_dict(loaded["state_dict"], strict=False)
     instance.eval()
