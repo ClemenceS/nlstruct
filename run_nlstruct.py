@@ -12,6 +12,7 @@ from transform_ann import changeFormat
 
 ################### USER CONFIGURATION #######################
 
+nb_gpu = 1   #0:cpu - 1:gpu
 
 # 1. List of the models - You can add more 
 
@@ -19,9 +20,9 @@ scibert_uncased="allenai/scibert_scivocab_uncased"
 bert_uncased = "bert-base-uncased"
 codebert = "microsoft/codebert-base"
 modernbert = "answerdotai/ModernBERT-base"
-modernbert_voc = "modele_answerdotai_ModernBERT-base_voc" #local path
 
 selected_model = scibert_uncased
+finetune_model = False  #True or False
 
 save_models = f"models_train/{selected_model.replace('/','_')}"
 
@@ -75,11 +76,11 @@ for seed_temp in tab_seeds:
                     "val"  : f"{path_data}/iteration_{i}/val", 
                     "test" : f"{path_data}/test"
                 },
-                finetune_bert= True,  # True or False
+                finetune_bert= finetune_model,
                 seed=seed_temp,
                 bert_name=selected_model,
                 fasttext_file="",
-                gpus=0,               #0:cpu - 1:gpu
+                gpus=nb_gpu,              
                 xp_name="my-xp",
                 return_model=True,
                 max_steps = 10,
