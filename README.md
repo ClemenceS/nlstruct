@@ -1,8 +1,8 @@
 This repo is a fork of the NLStruct repo by Perceval Wajsbürt, I have left the original README below.
 
-This fork adds the possibility when doing NER followed by a span classification model to take the posibility to use a specific encoder from an existing model.
+This fork adds the possibility when doing Named Entity Recognition (NER) followed by a span classification model to take the posibility to use a specific encoder from an existing model.
 
-You can use and modify the `run_nlstruct.py` file with your own configuration.
+To run the project, you can use the `run_nlstruct.py file and modify it with your own configuration.
 
 * It was used for experiments in the paper [Extracting Information in a Low-resource Setting: Case Study on Bioinformatics Workflows](https://arxiv.org/abs/2411.19295) (accepted to IDA 2025).
 
