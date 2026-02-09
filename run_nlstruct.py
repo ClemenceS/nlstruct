@@ -21,7 +21,9 @@ bert_uncased = "bert-base-uncased"
 codebert = "microsoft/codebert-base"
 modernbert = "answerdotai/ModernBERT-base"
 
-selected_model = scibert_uncased
+codebert = "csebe/codebert_bioinfo_voc"
+
+selected_model = codebert
 finetune_model = False  #True or False
 
 save_models = f"models_train/{selected_model.replace('/','_')}"
@@ -83,7 +85,7 @@ for seed_temp in tab_seeds:
                 gpus=nb_gpu,              
                 xp_name="my-xp",
                 return_model=True,
-                max_steps = 10,
+                max_steps = 4000,
                 model_to_take_encoder="None",
             )
                 
