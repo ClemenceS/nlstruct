@@ -33,7 +33,7 @@ def changeFormat(path):
                     new_line += typeE[0] + line.split(typeE_un)[-1] 
                     file_new.write(new_line)
                 else:
-                    if typeE[-1].find(':') != -1: #il ya des : dans le 2nd
+                    if typeE[-1].find(':') != -1:
                         if typeE[0].find(':') == -1:
                             new_line += typeE[0]  + line.split(typeE_un)[-1] 
                             file_new.write(new_line)
@@ -44,7 +44,7 @@ def changeFormat(path):
                         file_new.write(new_line)
                         file_new.write(new2)
             except:
-                None
+                file_new.write(line)
             
         file_new.close()
         
