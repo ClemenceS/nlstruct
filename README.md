@@ -4,6 +4,8 @@ This fork adds the possibility when doing Named Entity Recognition (NER) followe
 
 * To run Nlstruct, you can use the `run_nlstruct.py file and modify it with your own configuration.
 
+* This library was used for experiments on [CPL-Article](https://doi.org/10.5281/zenodo.18526700) and [CPL-Code](https://doi.org/10.5281/zenodo.18526760) corpora
+
 * This repository was used for experiments in the paper [Extracting Information in a Low-resource Setting: Case Study on Bioinformatics Workflows](https://arxiv.org/abs/2411.19295) (accepted to IDA 2025).
 
 ```
