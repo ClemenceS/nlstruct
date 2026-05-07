@@ -268,7 +268,7 @@ class BERTEncoder(TextEncoder):
 
         bert_model = self.bert.bert if hasattr(self.bert, 'bert') else self.bert.roberta if hasattr(self.bert, 'roberta') else self.bert
                 
-        if "ModernBERT-base" in path:
+        if "modernbert" in path.lower():
             bert_output_size = bert_model.embeddings.tok_embeddings.weight.shape[1] * (1 if combine_mode != "concat" else n_layers)
         else:
             bert_output_size = bert_model.embeddings.word_embeddings.weight.shape[1] * (1 if combine_mode != "concat" else n_layers)
@@ -284,12 +284,12 @@ class BERTEncoder(TextEncoder):
 
 
         if freeze_n_layers < 0:
-            if "ModernBERT-base" in path:
+            if "modernbert" in path.lower():
                 freeze_n_layers = len(bert_model.layers) + 2 + freeze_n_layers
             else:
                 freeze_n_layers = len(bert_model.encoder.layer) + 2 + freeze_n_layers
 
-        if "ModernBERT-base" in path: 
+        if "modernbert" in path.lower():
             for module in (bert_model.embeddings, *bert_model.layers)[:freeze_n_layers]:
                 for param in module.parameters():
                     param.requires_grad = False
